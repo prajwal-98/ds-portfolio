@@ -1,0 +1,37 @@
+# Virtualenv
+.venv/
+env/
+venv/
+
+# PyCharm
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Env files / secrets
+.env
+.env.local
+secrets.json
+
+# Logs, OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Data / big folders (keep out of repo)
+data/
+outputs/
+models/
+
+# Build
+dist/
+build/
+*.egg-info/
