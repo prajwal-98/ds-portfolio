@@ -1,0 +1,48 @@
+/* =========================================
+   1. ROOT VARIABLES (Default: LIGHT THEME)
+   ========================================= */
+   :root {
+    /* --- Core Backgrounds --- */
+    --bg: #FFFFFF;
+    --surface: #F9FAFB;        /* Slightly off-white for cards */
+    --surface-hover: #F3F4F6;  /* Hover state for list items */
+    
+    /* --- Typography --- */
+    --text: #0F1724;           /* Deep Navy/Black for high contrast */
+    --text-secondary: #55606A; /* Muted slate for subtitles */
+    --text-tertiary: #9AA6AD;  /* Light gray for placeholders/metadata */
+
+    /* --- Brand Accents --- */
+    --accent: #0EA5A5;         /* Premium Teal (Locked UI Context) */
+    --accent-hover: #0B7F7F;   /* Darker teal for hover states */
+    --accent-contrast: #FFFFFF; /* Text color on top of teal buttons */
+
+    /* --- Structural Lines & Borders --- */
+    --line: #E6EEF0;
+    --card-shadow: 0 4px 6px -1px rgba(7, 12, 21, 0.08), 0 2px 4px -1px rgba(7, 12, 21, 0.04);
+}
+
+/* =========================================
+   2. DARK THEME OVERRIDES
+   (Applied when <body class="theme-dark">)
+   ========================================= */
+body.theme-dark {
+    /* --- Core Backgrounds --- */
+    --bg: #0B0F12;             /* Deep rich black/blue */
+    --surface: #0F1720;        /* Slightly lighter dark for cards */
+    --surface-hover: #16202A;
+
+    /* --- Typography --- */
+    --text: #E6EEF0;           /* Off-white for readability */
+    --text-secondary: #9AA6AD; /* Muted gray */
+    --text-tertiary: #55606A;
+
+    /* --- Brand Accents --- */
+    --accent: #2DD4BF;         /* Brighter Teal/Cyan to pop against dark mode */
+    --accent-hover: #14B8A6;
+    --accent-contrast: #062426; /* Dark text on bright teal buttons */
+
+    /* --- Structural Lines & Borders --- */
+    --line: rgba(255, 255, 255, 0.08); /* Subtle white transparency */
+    --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+}

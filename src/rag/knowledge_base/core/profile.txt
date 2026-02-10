@@ -1,0 +1,49 @@
+# PRAJWAL HA - DATA SCIENTIST PROFILE
+
+## CONTACT
+- Email: prajwal8743@gmail.com
+- Phone: 9036387969
+- GitHub: https://github.com/prajwal-98
+- LinkedIn: www.linkedin.com/in/prajwalacharya
+- Location: Bengaluru, India
+
+## PROFESSIONAL SUMMARY
+Results-driven data science specialist with 2.5+ years of experience in designing and developing advanced machine learning and deep learning solutions. Proficient in Python, NLP, and GenAI. Actively leveraging Large Language Models (LLMs) and LangChain to drive automation.
+
+## WORK EXPERIENCE
+
+**Data Scientist at LEAPS (Powered By Analyttica)**
+*Duration: Sept 2022 - Jan 2025 | Bengaluru*
+*Skills:* Python, GenAI, RAG, Fine-Tuning, SQL, MLOps, Pinecone, React Agent.
+
+- **GenAI & RAG:** Designed and deployed a RAG-powered recommendation engine for data science functions. Used GPT-4o and LangChain to build pipelines and generate contextual data.
+- **Copilot Project:** Integrated processing, inference, and recommendation engines. Improved accuracy from 70% to 90% by using Llama-3.2 for contextual data generation.
+- **React Agent:** Built a dynamic API integration router framework using React Agents and Pinecone vector database.
+- **MLOps:** Added experiment tracking, model serving, and retraining capabilities to the product.
+- **Business Impact:** Developed analytics that drove a 60% increase in customer engagement and reduced churn by 25%.
+- **Leadership:** Oversaw code reviews and debugging for junior team members.
+
+**Python Developer Intern at Analyttica Datalab**
+*Duration: May 2022 - Sept 2022 | Bengaluru*
+- Automating tasks using Python scripts to reduce manual effort.
+- Inventory management analysis using vehicle telematics, reducing operational costs by 25%.
+
+## PERSONAL PROJECTS
+
+**Recommendation System for Visualization Dashboard**
+*Duration: Mar 2023 - Jan 2024*
+*Tech Stack:* NLP, Transformers, GenAI, Streamlit, Kafka, Plotly.
+- Built a real-time visualization dashboard using Plotly and Streamlit.
+- Used Kafka for low-latency data streaming.
+- Implemented concurrency (managing GIL) to optimize performance.
+- Achieved adoption by 1,000+ daily users.
+
+## TECHNICAL SKILLS
+- **Languages:** Python (Expert), SQL, Bash.
+- **GenAI & LLM:** LangChain, OpenAI API, Llama-3.2, GPT-4o, RAG Pipelines, Prompt Engineering, Vector Databases (Pinecone/Chroma).
+- **Machine Learning:** Scikit-Learn, TensorFlow, PandasAI, NLTK, Hypothesis Testing.
+- **Tools & Platforms:** Docker, FastAPI, Git (GitHub/Bitbucket), Streamlit, Tableau, Jupyter.
+
+## EDUCATION
+- **Master of Computer Applications (MCA):** MS Ramaiah Institute of Technology (CGPA 9.2) | 2020-2022
+- **Bachelor of Computer Applications (BCA):** Dayananda Sagar University (CGPA 8.2) | 2017-2019

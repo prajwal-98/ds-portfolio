@@ -1,0 +1,294 @@
+/* ==========================================================================
+   1. GLOBAL RESET & FONTS
+   ========================================================================== */
+   html, body, [class*="css"] {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   2. THE PAGE FRAME (Fixed for Sticky)
+   ========================================================================== */
+.block-container {
+    max-width: 95% !important;
+    padding-top: 0rem !important;
+    padding-bottom: 2rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+
+    border-left: 1px solid rgba(0, 0, 0, 0.04) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 0 50px -10px rgba(0, 0, 0, 0.06) !important;
+    
+    /* CRITICAL: Allows the sticky navbar to remain in the viewport */
+    overflow: visible !important; 
+}
+
+/* Force parent containers to allow sticky behavior */
+[data-testid="stAppViewBlockContainer"], 
+[data-testid="stAppViewContainer"],
+section.main {
+    overflow: visible !important;
+}
+
+/* ==========================================================================
+   3. THE MAIN CONTENT FRAME
+   ========================================================================== */
+.main-content {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0rem !important;
+    margin-top: 0rem !important;
+}
+
+/* ==========================================================================
+   4. THE NAVBAR (Locked Weights + Sticky Fix)
+   ========================================================================== */
+
+/* 4a. THE NAVBAR STRIP - FORCED TO TOP */
+div[data-testid="stHorizontalBlock"]:nth-of-type(1) {
+    position: -webkit-sticky !important; /* Safari */
+    position: sticky !important;
+    top: 0px !important;
+    z-index: 999999 !important; 
+    
+    background: var(--bg) !important;
+    border-radius: 0px !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.9) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+   
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12) !important;
+   
+    padding: 1rem 0rem !important;
+    margin-bottom: 3rem !important;
+    align-items: center !important;
+}
+
+/* 4b. RESET COLUMN PADDING */
+div[data-testid="stHorizontalBlock"]:nth-of-type(1) [data-testid="stColumn"] {
+    min-width: 0px !important;
+    padding: 0px 2px !important;  
+    flex: unset !important;      
+}
+
+/* 4c. BUTTON CONTAINER STYLING */
+div[data-testid="stHorizontalBlock"]:nth-of-type(1) button {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--text-secondary) !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    white-space: nowrap !important;
+    transition: all 0.2s ease !important;
+    border-radius: 8px !important;
+   
+    width: auto !important;        
+    min-width: 50px !important;    
+    padding: 0.4rem 0.8rem !important;
+    margin: 0 auto !important;      
+   
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* 4d. DEEP FIX: INNER WRAPPER */
+div[data-testid="stHorizontalBlock"]:nth-of-type(1) button > div {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+/* 4e. DEEP FIX: TEXT ELEMENT */
+div[data-testid="stHorizontalBlock"]:nth-of-type(1) button p {
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    display: block !important;
+}
+
+/* Hover Effects */
+div[data-testid="stHorizontalBlock"]:nth-of-type(1) button:hover {
+    color: var(--text) !important;
+    background-color: rgba(0,0,0,0.05) !important;
+    transform: translateY(-1px);
+}
+
+/* Hide Separator */
+.navbar-separator {
+    display: none;
+}
+
+/* ==========================================================================
+   5. STANDARD DIVIDERS
+   ========================================================================== */
+hr {
+    border-color: var(--line) !important;
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+    opacity: 0.4;
+}
+
+/* ==========================================================================
+   6. TYPOGRAPHY & COLORS
+   ========================================================================== */
+h1, h2, h3 {
+    letter-spacing: -0.02em;
+    color: var(--text) !important;
+}
+
+p, li, span {
+    line-height: 1.6;
+    color: var(--text-secondary) !important;
+}
+
+input, textarea, .stTextInput > div > div {
+    color: var(--text) !important;
+    background-color: var(--bg) !important;
+}
+
+/* ==========================================================================
+   7. STANDARD BUTTON STYLING (Non-Navbar)
+   ========================================================================== */
+div[data-testid="stVerticalBlock"] .stButton button {
+    border-radius: 8px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    background-color: var(--surface);
+    color: var(--text);
+    transition: all 0.2s ease;
+}
+
+div[data-testid="stVerticalBlock"] .stButton button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* ==========================================================================
+   8. CUSTOM SCROLLBARS
+   ========================================================================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
+
+/* ==========================================================================
+   9. SYSTEM UI CLEANUP (Removes Header & Sidebar)
+   ========================================================================== */
+header[data-testid="stHeader"] {
+    visibility: hidden;
+    height: 0px !important;
+}
+
+[data-testid="stSidebar"], 
+[data-testid="stSidebarNav"], 
+button[data-testid="baseButton-headerNoPadding"],
+[data-testid="stSidebarCollapseButton"] {
+    display: none !important;
+}
+
+/* ==========================================================================
+   10. ICON THEME TOGGLE STYLING
+   ========================================================================== */
+div[data-testid="stColumn"]:last-of-type button {
+    font-size: 1.2rem !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: transform 0.3s ease !important;
+}
+
+div[data-testid="stColumn"]:last-of-type button:hover {
+    transform: scale(1.1) rotate(15deg) !important;
+    background: transparent !important;
+}
+
+/* ==========================================================================
+   11. HERO SECTION STYLING
+   ========================================================================== */
+
+/* Circular Profile Image */
+.hero-image-container img {
+    border-radius: 50% !important; /* Makes the photo circular */
+    object-fit: cover !important;
+    border: 3px solid rgba(0,0,0,0.05) !important; /* Subtle border */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    transition: transform 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-image-container img:hover {
+    transform: scale(1.02);
+}
+
+/* Typography Enhancements */
+.hero-text h1 {
+    font-size: 3.5rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+    color: var(--text) !important;
+}
+
+.hero-text h3 {
+    font-size: 1.5rem !important;
+    font-weight: 500 !important;
+    color: var(--text-secondary) !important;
+}
+
+.hero-text p {
+    font-size: 1.15rem !important;
+    color: var(--text-secondary) !important;
+    max-width: 90%;
+}
+
+/* Mobile Responsiveness for Hero */
+@media (max-width: 768px) {
+    .hero-text h1 { font-size: 2.5rem !important; text-align: center; }
+    .hero-text h3 { font-size: 1.2rem !important; text-align: center; }
+    .hero-text p { text-align: center; margin: 0 auto; }
+    
+    /* Center the buttons on mobile */
+    div[data-testid="column"] { display: flex; flex-direction: column; align-items: center; }
+    
+    /* Stack the image on top (CSS Trick) */
+    /* Note: Streamlit structure makes reordering hard, 
+       but we can center the image to look good stacked. */
+    .hero-image-container img { width: 200px !important; margin-bottom: 2rem; }
+}
+
+/* ==========================================================================
+   12. ASK MAGGIE CARD STYLING
+   ========================================================================== */
+/* Smooth transition for the chat input field */
+.stChatInput textarea {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+}
+
+.stChatInput textarea:focus {
+    border-color: #0E5A65 !important;
+    box-shadow: 0 0 0 2px rgba(14, 90, 101, 0.1) !important;
+}

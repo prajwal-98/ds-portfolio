@@ -35,3 +35,14 @@ models/
 dist/
 build/
 *.egg-info/
+src/rag/vector_store/
+
+# --- CRITICAL MISSING ITEMS ---
+dsportfolio_venv/
+.streamlit/secrets.toml
+
+# Windows specific
+$RECYCLE.BIN/
+
+# Secrets gcp_sa.json
+secrets/gcp_sa.json
