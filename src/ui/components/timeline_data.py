@@ -3,52 +3,87 @@
 def get_career_timeline_data():
     """
     Returns the dictionary required by TimelineJS.
+    Strict JSON format to prevent errors.
     """
     return {
         "title": {
             "media": {
-                "url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
-                "caption": "Future Goals",
-                "credit": "AI & Tech"
+                "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop",
+                "caption": "The Journey",
+                "credit": "Tech & Growth"
             },
             "text": {
-                "headline": "Prajwal's Career Journey",
-                "text": "<p>From University Graduation to building Enterprise GenAI Systems. A timeline of technical growth and milestones.</p>"
+                "headline": "Prajwal's Career Roadmap",
+                "text": "<p>From <strong>Student Leader</strong> to <strong>Award-Winning GenAI Scientist</strong>.<br>A timeline of rapid technical growth, mentorship, and enterprise impact.</p>"
             }
         },
         "events": [
             {
-                "start_date": {"year": "2026", "month": "05"},
+                "start_date": {"year": "2025", "month": "01"},
+                "end_date": {"year": "2026", "month": "02"},
                 "text": {
-                    "headline": "Target: Product-Based Tech Company",
-                    "text": "<p><strong>Goal:</strong> Transition to a GenAI Engineer or Applied Scientist role.<br><strong>Focus:</strong> Mastering Agentic Workflows, System Design, and Scalable Inference.<br><strong>Prep:</strong> Building end-to-end portfolio projects and contributing to open source.</p>"
+                    "headline": "Data Scientist @ Capgemini",
+                    "text": """
+                    <p><strong>Client: Unilever</strong></p>
+                    <ul>
+                        <li>🏆 <strong>Double Award Winner:</strong> Won 'Best Employee' twice in 1 year.</li>
+                        <li>Spearheading critical GenAI projects.</li>
+                        <li><em>Stack: Azure OpenAI, PySpark.</em></li>
+                    </ul>
+                    """
                 },
                 "media": {
-                    "url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070&auto=format&fit=crop",
-                    "caption": "The Next Chapter"
+                    "url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop",
+                    "caption": "Enterprise GenAI"
                 }
             },
             {
                 "start_date": {"year": "2023", "month": "01"},
-                "end_date": {"year": "2026", "month": "01"}, # Present
+                "end_date": {"year": "2024", "month": "12"},
                 "text": {
-                    "headline": "Data Scientist @ Capgemini",
-                    "text": "<p><strong>Client: Unilever</strong><br>Engineered RAG pipelines reducing documentation search time by 40%.<br>Optimized batch inference for sales forecasting using <strong>Databricks & PySpark</strong>.<br>Mentored juniors on Prompt Engineering and Clean Code standards.</p>"
+                    "headline": "Jr Data Scientist @ Analytica",
+                    "text": """
+                    <p>Promoted from Intern.</p>
+                    <ul>
+                        <li><strong>Key Win:</strong> Trained non-tech staff on <strong>LEAPS</strong> product.</li>
+                        <li>Bridged the gap between Data & Business.</li>
+                        <li><em>Stack: Python, Mentorship.</em></li>
+                    </ul>
+                    """
                 },
                 "media": {
-                    "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-                    "caption": "Enterprise AI"
+                    "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
+                    "caption": "Mentorship & Product"
                 }
             },
             {
-                "start_date": {"year": "2022", "month": "06"},
+                "start_date": {"year": "2022", "month": "01"},
+                "end_date": {"year": "2022", "month": "12"},
                 "text": {
-                    "headline": "Graduation & Career Start",
-                    "text": "<p>Graduated with Distinction in Computer Science.<br>Completed intensive internship focused on <strong>Data Analysis & Visualization</strong>.<br>Laid the foundation in SQL, Python, and Statistical Modeling.</p>"
+                    "headline": "Python Intern @ Analytica",
+                    "text": "<p>Kickstarted professional career.<br>Built foundational Python scripts for automated reporting and analytics workflows.</p>"
+                },
+                "media": {
+                    "url": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2069&auto=format&fit=crop",
+                    "caption": "Coding Foundations"
+                }
+            },
+            {
+                "start_date": {"year": "2021", "month": "06"},
+                "end_date": {"year": "2022", "month": "06"},
+                "text": {
+                    "headline": "MCA - Ramaiah Institute",
+                    "text": """
+                    <p>Graduated in Computer Applications.</p>
+                    <ul>
+                        <li><strong>Leader:</strong> College Rep for Blockchain events.</li>
+                        <li>Led technical debates on emerging tech.</li>
+                    </ul>
+                    """
                 },
                 "media": {
                     "url": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop",
-                    "caption": "University"
+                    "caption": "Academics"
                 }
             }
         ]

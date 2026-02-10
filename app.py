@@ -24,6 +24,7 @@ from src.ui.pages.photography import render_photography
 # Component Imports
 from src.ui.components.navbar import render_navbar
 from src.ui.components.footer import render_footer
+from src.ui.chat.interface import render_chat_interface 
 
 # Utility Imports (Theme Manager)
 # NOTE: Ensure src/utils/theme.py exists with these functions
@@ -67,28 +68,31 @@ render_navbar()
 # --------------------------------------------------
 # 6. Main Content Router
 # --------------------------------------------------
-# We wrap content in a div for potential CSS targeting
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
 current_page = st.session_state.page
 
+# Render the specific page content
 if current_page == "Home":
     render_home()
-
 elif current_page == "About":
     render_about()
-
 elif current_page == "Career Snapshot":
     render_career_snapshot()
-
 elif current_page == "Projects":
     render_projects()
-
 elif current_page == "Resume":
     render_resume()
-
 elif current_page == "Photography":
     render_photography()
+elif current_page == "Ask Me":  # The dedicated page
+    st.title("Ask Me Anything")
+    render_chat_interface(key="page_chat_interface")
+
+# --------------------------------------------------
+# Global "Ask Me" Section
+# --------------------------------------------------
+# This will appear at the bottom of every page
 
 st.markdown('</div>', unsafe_allow_html=True)
 

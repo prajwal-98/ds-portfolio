@@ -1,40 +1,48 @@
+# src/ui/components/career_preview.py
 import streamlit as st
+from streamlit_timeline import timeline
+from src.ui.components.timeline_data import get_career_timeline_data
 
 def render_career_preview():
     """
-    Renders a preview of the Career Snapshot page.
-    Currently shows the latest role as a clickable action.
+    Renders the interactive TimelineJS component with CSS fixes.
     """
     
-    # 1. Component CSS
+    # --- CSS FIX: FORCE HEIGHT & REMOVE SCROLLBARS ---
     st.markdown("""
         <style>
-        .career-section-header {
-            margin-bottom: 1rem;
-            color: var(--text);
-            font-weight: 600;
-        }
-        
-        /* Optional: We can style the specific button if we target it by key later,
-           but standard Streamlit buttons work best for reliable clicking. */
+            /* 1. Target the iframe specifically to force height */
+            iframe.stWait {
+                height: 600px !important;
+                width: 100% !important;
+            }
+            
+            /* 2. Ensure the container doesn't cut off the bottom (years) */
+            .element-container {
+                overflow: visible !important;
+            }
+            
+            /* 3. Hide the internal Streamlit scrollbar for this block */
+            iframe {
+                border: none !important;
+                overflow: hidden !important;
+            }
         </style>
     """, unsafe_allow_html=True)
 
-    # 2. Layout Container
-    st.markdown('<div style="margin-bottom: 80px; padding: 0 1rem;">', unsafe_allow_html=True)
-    st.markdown("<h3 class='career-section-header'>Career Snapshot</h3>", unsafe_allow_html=True)
-    
-    # 3. The Interactive "Card" (Button)
-    # We use a button because it handles the Python click event natively and reliably.
-    # Text is formatted to look like a summary.
-    btn_label = (
-        "📍 LATEST ROLE: Data Scientist @ Capgemini (Unilever)\n"
-        "Focus: GenAI Pipelines, Prompt Engineering & Batch Inference\n"
-        "2.5+ Years Experience • Click to view full timeline →"
-    )
-    
-    if st.button(btn_label, key="career_preview_btn", use_container_width=True):
-        st.session_state.page = "Career Snapshot"
-        st.rerun()
-
+    # 1. Header
+    st.markdown('<div style="margin-bottom: 20px;">', unsafe_allow_html=True)
+    st.caption("Swipe or drag the timeline below to explore my journey.")
     st.markdown('</div>', unsafe_allow_html=True)
+
+    # 2. Load Data
+    data = get_career_timeline_data()
+
+    # 3. Check Data
+    if not data or "events" not in data:
+        st.error("Timeline data is missing.")
+        return
+
+    # 4. Render Timeline
+    # We use height=600 to ensure the bottom navigation bar is visible
+    timeline(data, height=450)
