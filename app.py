@@ -68,7 +68,6 @@ render_navbar()
 # --------------------------------------------------
 # 6. Main Content Router
 # --------------------------------------------------
-st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
 current_page = st.session_state.page
 
@@ -88,13 +87,6 @@ elif current_page == "Photography":
 elif current_page == "Ask Me":  # The dedicated page
     st.title("Ask Me Anything")
     render_chat_interface(key="page_chat_interface")
-
-# --------------------------------------------------
-# Global "Ask Me" Section
-# --------------------------------------------------
-# This will appear at the bottom of every page
-
-st.markdown('</div>', unsafe_allow_html=True)
 
 
 # --------------------------------------------------

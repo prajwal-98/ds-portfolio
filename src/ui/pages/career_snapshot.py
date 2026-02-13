@@ -7,7 +7,3 @@ def render_career_snapshot():
     
     # Render the component
     render_career_preview()
-
-    # Footer
-    st.markdown("---")
-    st.caption("🚀 *Always learning, always building.*")

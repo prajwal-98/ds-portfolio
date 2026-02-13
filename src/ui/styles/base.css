@@ -10,10 +10,10 @@
 /* ==========================================================================
    2. THE PAGE FRAME (Fixed for Sticky)
    ========================================================================== */
-.block-container {
+   .block-container {
     max-width: 95% !important;
-    padding-top: 0rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 0rem !important; 
+    padding-bottom: 0rem !important;
     padding-left: 2rem !important;
     padding-right: 2rem !important;
 
@@ -21,9 +21,10 @@
     border-right: 1px solid rgba(0, 0, 0, 0.04) !important;
     box-shadow: 0 0 50px -10px rgba(0, 0, 0, 0.06) !important;
     
-    /* CRITICAL: Allows the sticky navbar to remain in the viewport */
     overflow: visible !important; 
 }
+
+
 
 /* Force parent containers to allow sticky behavior */
 [data-testid="stAppViewBlockContainer"], 
@@ -49,31 +50,31 @@ section.main {
 
 /* 4a. THE NAVBAR STRIP - FORCED TO TOP */
 div[data-testid="stHorizontalBlock"]:nth-of-type(1) {
-    position: -webkit-sticky !important; /* Safari */
-    position: sticky !important;
-    top: 0px !important;
-    z-index: 999999 !important; 
+    /* position: -webkit-sticky !important; Safari */
+    /* position: sticky !important; */
+    /* top: 0px !important; */
+    /* z-index: 999999 !important;  */
     
     background: var(--bg) !important;
     border-radius: 0px !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.9) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    /* border-left: none !important; */
+    /* border-right: none !important; */
+    /* border-top: 1px solid rgba(255, 255, 255, 0.9) !important; */
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; */
    
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12) !important;
    
-    padding: 1rem 0rem !important;
-    margin-bottom: 3rem !important;
-    align-items: center !important;
+    padding: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    align-items: center !important; 
 }
 
 /* 4b. RESET COLUMN PADDING */
-div[data-testid="stHorizontalBlock"]:nth-of-type(1) [data-testid="stColumn"] {
+/* div[data-testid="stHorizontalBlock"]:nth-of-type(1) [data-testid="stColumn"] {
     min-width: 0px !important;
     padding: 0px 2px !important;  
     flex: unset !important;      
-}
+} */
 
 /* 4c. BUTTON CONTAINER STYLING */
 div[data-testid="stHorizontalBlock"]:nth-of-type(1) button {
@@ -132,8 +133,8 @@ div[data-testid="stHorizontalBlock"]:nth-of-type(1) button:hover {
    ========================================================================== */
 hr {
     border-color: var(--line) !important;
-    margin-top: 3rem !important;
-    margin-bottom: 3rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
     opacity: 0.4;
 }
 
@@ -174,7 +175,7 @@ div[data-testid="stVerticalBlock"] .stButton button:hover {
 }
 
 /* ==========================================================================
-   8. CUSTOM SCROLLBARS
+   8. CUSTOM SCROLLBARSZ
    ========================================================================== */
 ::-webkit-scrollbar {
     width: 8px;
@@ -206,76 +207,6 @@ button[data-testid="baseButton-headerNoPadding"],
     display: none !important;
 }
 
-/* ==========================================================================
-   10. ICON THEME TOGGLE STYLING
-   ========================================================================== */
-div[data-testid="stColumn"]:last-of-type button {
-    font-size: 1.2rem !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    transition: transform 0.3s ease !important;
-}
-
-div[data-testid="stColumn"]:last-of-type button:hover {
-    transform: scale(1.1) rotate(15deg) !important;
-    background: transparent !important;
-}
-
-/* ==========================================================================
-   11. HERO SECTION STYLING
-   ========================================================================== */
-
-/* Circular Profile Image */
-.hero-image-container img {
-    border-radius: 50% !important; /* Makes the photo circular */
-    object-fit: cover !important;
-    border: 3px solid rgba(0,0,0,0.05) !important; /* Subtle border */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
-    transition: transform 0.3s ease;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero-image-container img:hover {
-    transform: scale(1.02);
-}
-
-/* Typography Enhancements */
-.hero-text h1 {
-    font-size: 3.5rem !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.03em !important;
-    color: var(--text) !important;
-}
-
-.hero-text h3 {
-    font-size: 1.5rem !important;
-    font-weight: 500 !important;
-    color: var(--text-secondary) !important;
-}
-
-.hero-text p {
-    font-size: 1.15rem !important;
-    color: var(--text-secondary) !important;
-    max-width: 90%;
-}
-
-/* Mobile Responsiveness for Hero */
-@media (max-width: 768px) {
-    .hero-text h1 { font-size: 2.5rem !important; text-align: center; }
-    .hero-text h3 { font-size: 1.2rem !important; text-align: center; }
-    .hero-text p { text-align: center; margin: 0 auto; }
-    
-    /* Center the buttons on mobile */
-    div[data-testid="column"] { display: flex; flex-direction: column; align-items: center; }
-    
-    /* Stack the image on top (CSS Trick) */
-    /* Note: Streamlit structure makes reordering hard, 
-       but we can center the image to look good stacked. */
-    .hero-image-container img { width: 200px !important; margin-bottom: 2rem; }
-}
 
 /* ==========================================================================
    12. ASK MAGGIE CARD STYLING

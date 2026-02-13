@@ -1,131 +1,139 @@
 import streamlit as st
-from src.ui.chat.interface import render_chat_interface
+import base64
+import os
+from PIL import Image
+import io
 
-# --- 1. HERO SECTION ---
-def render_hero():
-    st.write("") 
-    with st.container():
-        c_text, c_img = st.columns([1.6, 1], gap="large")
+@st.dialog("🤖 Ask Prajwal's AI Assistant")
+def open_ask_me_dialog():
+    st.write("I have read Prajwal's resume and codebase. Ask me anything!")
+    user_query = st.chat_input("Ex: What is your experience with RAG?")
+    if user_query:
+        with st.chat_message("user"):
+            st.write(user_query)
+        with st.chat_message("assistant"):
+            st.write("I am a demo bot. Connect your logic here to answer: " + user_query)
+
+def get_image_base64(path):
+    if os.path.exists(path):
+        img = Image.open(path)
         
-        with c_text:
-            st.markdown("""
-            <h1 style='margin-bottom: 0px;'>Prajwal</h1>
-            <h3 style='font-weight: 400; color: #666; margin-top: 0px;'>Data Scientist</h3>
-            <br>
-            <p style='font-size: 1.2rem; line-height: 1.6;'>
-                Data Scientist building <b>Machine Learning</b> and <b>Generative AI</b> systems end-to-end. 
-                Focusing on scalable pipelines from idea to deployment.
-            </p>
-            """, unsafe_allow_html=True)
-            
-            st.write("") 
-            
-            b1, b2 = st.columns([0.4, 0.6])
-            with b1:
-                if st.button("Contact Me", type="primary", use_container_width=True):
-                    st.markdown("[Go to Footer](#contact)") # Simple anchor link
-            with b2:
-                if st.button("Download Resume ⇩", use_container_width=True):
-                    st.session_state.page = "Resume"
-                    st.rerun()
-
-        with c_img:
-            # Replace with your image
-            st.image("https://placehold.co/400x400/png?text=Prajwal", width=350) 
-
-# --- 2. SKILLS SECTION ---
-def render_skills():
-    st.write("")
-    st.divider()
-    st.subheader("🚀 Technical Skills")
-    
-    # Simple columnar layout for skills
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        st.markdown("**Languages**")
-        st.caption("Python, SQL, Bash")
-    with c2:
-        st.markdown("**GenAI**")
-        st.caption("LangChain, RAG, OpenAI API")
-    with c3:
-        st.markdown("**Data Eng**")
-        st.caption("PySpark, Databricks, ETL")
-    with c4:
-        st.markdown("**Tools**")
-        st.caption("Git, Docker, Streamlit")
-
-# --- 3. ASK ME ANYTHING (Chat Section) ---
-def render_ask_maggie_section():
-    st.write("")
-    st.divider()
-    st.subheader("🤖 Ask Me Anything")
-    st.caption("Curious about my work? Chat with my AI agent below.")
-
-    # We use a container to visually frame the chat in the middle of the page
-    with st.container(border=True):
-        # Unique key ensures this specific instance works correctly
-        render_chat_interface(key="home_middle_chat")
-
-# --- 4. PROJECTS SECTION (Preview) ---
-def render_projects_preview():
-    st.write("")
-    st.divider()
-    st.subheader("🛠️ Featured Projects")
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.info("**GenAI Portfolio (This App)**\n\nBuilt a RAG-based portfolio using Streamlit & LangChain.")
-    with c2:
-        st.success("**Enterprise Data Pipeline**\n\nProcessed 1TB+ data using PySpark & Databricks.")
-    
-    if st.button("View All Projects →"):
-        st.session_state.page = "Projects"
-        st.rerun()
-
-# --- 5. CAREER SNAPSHOT ---
-def render_career_snapshot():
-    st.write("")
-    st.divider()
-    st.subheader("📈 Career Snapshot")
-    
-    st.markdown("""
-    * **Senior Data Scientist** @ Capgemini (2023 - Present)
-    * **Data Analyst** @ StartUp Inc (2021 - 2023)
-    """)
-
-# --- 6. FOOTER (Contact) ---
-def render_footer():
-    st.write("")
-    st.divider()
-    st.subheader("📬 Get In Touch")
-    
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown("📧 **Email:** prajwal@example.com")
-    with c2:
-        st.markdown("🔗 **LinkedIn:** [linkedin.com/in/prajwal](#)")
-    with c3:
-        st.markdown("🐙 **GitHub:** [github.com/prajwal](#)")
+        # --- CROP LOGIC ---
+        # Define coordinates: (left, top, right, bottom)
+        # Example: Crop 100 pixels off the top and bottom
+        width, height = img.size
+        img = img.crop((0, height * 0.1, width, height * 0.9)) 
         
-    st.write("")
-    st.caption("© 2026 Prajwal. Built with Streamlit & Gemini.")
+        # Convert back to base64
+        buffered = io.BytesIO()
+        img.save(buffered, format="JPEG")
+        return base64.b64encode(buffered.getvalue()).decode()
+    return None
 
-# --- MAIN PAGE ASSEMBLER ---
 def render_home():
-    # 1. Top: Hero
-    render_hero()
+    # --- 1. LOCAL STYLES ---
+    st.markdown("""
+        <style>
+            /* --- TEXT STYLING --- */
+            .hero-name-text {
+                font-size: 2.5rem !important;
+                font-weight: 800 !important;
+                color: var(--text) !important;
+                line-height: 1.0 !important;
+                margin-bottom: 5px !important;
+                margin-left: 13px !important;
+            }
+            .hero-intro-text {
+                font-size: 1rem !important;
+                font-weight: 600 !important;
+                color: var(--text) !important;
+                margin-bottom: 0px !important;
+                margin-left: 15px !important;
+            }
+            .hero-detail-text {
+                font-size: 1rem !important;
+                color: grey !important;
+                font-weight: 400 !important;
+                margin-top: 10px !important;
+                margin-left: 15px !important;
+            }
+
+            /* --- IMAGE STYLING --- */
+            .profile-pic-square {
+                width: 350px !important;   
+                height: 400px !important;  
+                border-radius: 12px !important;
+                object-fit: cover !important;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+                margin-top: -20px !important;  
+                margin-left: -40px !important;
+                margin-bottom: 30px !important;  
+            }
+
+            /* --- NEW "CHAT INPUT" STYLE BUTTON --- */
+            div.stButton > button[kind="primary"] {
+                /* Make it look like a text box */
+                background: white !important;
+                color: #666 !important; /* Grey text like a placeholder */
+                border: 1px solid #ddd !important;
+                border-radius: 12px !important;
+                
+                /* Size & Spacing */
+                padding: 12px 20px !important;
+                width: 380px !important; /* Wider, like a search bar */
+                margin-top: 25px !important; 
+                margin-left: 100px !important; /* Matches your text padding */
+                
+                /* Text alignment */
+                display: flex !important;
+                justify-content: space-between !important; /* Text left, Icon right */
+                align-items: center !important;
+                
+                font-size: 0.95rem !important;
+                font-weight: 400 !important;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+                transition: all 0.2s ease !important;
+            }
+
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # 2. CONVERT YOUR PHOTO
+    img_path = r"D:/ds-portfolio/assets/profile_pic/U89A0267.JPG"
+    img_base64 = get_image_base64(img_path)
     
-    # 2. Next: Skills
-    render_skills()
+    # Fallback to a placeholder if file is missing
+    display_img = f"data:image/JPG;base64,{img_base64}" if img_base64 else "https://ui-avatars.com/api/?name=Prajwal"
+
+    # --- 2. THE LAYOUT ---
+    col_text, col_img = st.columns([1.5, 1], gap="small", vertical_alignment="center")
+
+    # --- LEFT COLUMN ---
+    with col_text:
+        # 1. TEXT SECTION
+        st.markdown("""
+            <div style="text-align: left; margin-top: -60px; padding-left: 100px;"> 
+                <span class="hero-intro-text">I am</span><br>
+                <span class="hero-name-text">Prajwal Acharya</span><br>
+                <span class="hero-detail-text">
+                    <span style="font-size: 0.9rem; opacity: 0.8;">I design, code and build. Inspired by tough problems</span>
+                </span>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        # 2. BUTTON SECTION (The Chat Bar)
+        # We use spaces in the label to push the sparkle icon to the far right
+        if st.button("Ask Maggie to analyze my resume ✨", type="primary"):
+            open_ask_me_dialog()
     
-    # 3. Next: Ask Me Anything (Middle of page)
-    render_ask_maggie_section()
     
-    # 4. Next: Projects
-    render_projects_preview()
-    
-    # 5. Next: Career Snapshot
-    render_career_snapshot()
-    
-    # 6. Bottom: Footer
-    render_footer()
+
+    # --- RIGHT COLUMN ---
+    with col_img:
+        st.markdown(f"""
+            <div style="display: flex; justify-content: center;">
+                <img src="{display_img}" 
+                     class="profile-pic-square">
+            </div>
+        """, unsafe_allow_html=True)
