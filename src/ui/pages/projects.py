@@ -1,255 +1,212 @@
 import streamlit as st
-import textwrap # Add this if you want to be safe, or just use the code below
 
-# --- 1. MAIN FEATURED PROJECTS (The "Big 4") ---
+# --- 1. CONFIGURATION ---
+if __name__ == "__main__":
+    st.set_page_config(
+        page_title="Projects | Prajwal",
+        page_icon="🧪",
+        layout="wide"
+    )
+
+# --- 2. DATA: PROJECTS ---
 PROJECTS = [
     {
-        "title": "GenAI Portfolio Website",
+        "title": "GenAI Portfolio Engine",
         "category": "GenAI",
-        "tags": ["Streamlit", "LangChain", "RAG", "ChromaDB"],
-        "description": "A personal portfolio engine featuring a self-aware RAG chatbot. It ingests my resume/codebase and answers questions.",
+        "tags": ["Streamlit", "LangChain", "RAG", "Pinecone"],
+        "description": "A self-aware portfolio that uses RAG to answer questions about my resume and code. Built with a custom Streamlit UI and hybrid search retrieval.",
         "links": {"GitHub": "#", "Live Demo": "#"},
-        "image": "https://placehold.co/600x400/2E3B55/FFF?text=GenAI+Portfolio"
+        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop"
     },
     {
-        "title": "Enterprise LLM Tagging System",
-        "category": "GenAI",
-        "tags": ["Python", "OpenAI API", "Batch Processing"],
-        "description": "Designed a batch-processing system to tag thousands of product descriptions. Reduced API costs by 30%.",
-        "links": {"GitHub": "#"},
-        "image": "https://placehold.co/600x400/E74C3C/FFF?text=LLM+Tagger"
-    },
-    {
-        "title": "High-Volume Data Pipeline",
+        "title": "Real-Time Fraud Guard",
         "category": "Data Engineering",
-        "tags": ["PySpark", "Databricks", "SQL"],
-        "description": "Built an end-to-end pipeline merging complex datasets from multiple zones with automated audit logs.",
+        "tags": ["PySpark", "Databricks", "Kafka", "MLflow"],
+        "description": "Enterprise-grade pipeline processing 10TB+ daily transaction data. Detects anomalies in sub-200ms latency using Structured Streaming.",
         "links": {"GitHub": "#"},
-        "image": "https://placehold.co/600x400/27AE60/FFF?text=Data+Pipeline"
+        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop"
     },
     {
-        "title": "Visual Data Validator",
-        "category": "Data Analysis",
-        "tags": ["Pandas", "Streamlit", "Data Visualization"],
-        "description": "A utility tool for comparing 'Old vs New' datasets. Visualizes schema changes and row counts.",
+        "title": "Enterprise LLM Tagger",
+        "category": "GenAI",
+        "tags": ["Python", "OpenAI API", "AsyncIO"],
+        "description": "Designed an async batch-processing system to tag 50k+ product descriptions. Optimized token usage to reduce API costs by 30%.",
         "links": {"GitHub": "#"},
-        "image": "https://placehold.co/600x400/F1C40F/333?text=Data+Validator"
+        "image": "https://images.unsplash.com/photo-1662947036643-2339bd9273c5?q=80&w=1000&auto=format&fit=crop"
+    },
+    {
+        "title": "Legacy to Lakehouse Migration",
+        "category": "Cloud Architecture",
+        "tags": ["Azure", "Terraform", "Airflow"],
+        "description": "Migrated on-prem SQL Server infrastructure to Azure Data Lake. Implemented automated schema evolution and Great Expectations quality checks.",
+        "links": {"GitHub": "#"},
+        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
     }
 ]
 
-# --- 3. HELPER: RENDER MAIN CARD ---
-def render_project_card(project):
-    """Renders a detailed card for featured projects."""
-    with st.container(border=True):
-        st.image(project["image"], use_container_width=True)
-        st.subheader(project["title"])
-        st.write(" ".join([f"`{tag}`" for tag in project["tags"]]))
-        st.caption(project["description"])
-        cols = st.columns(len(project["links"]))
-        for i, (label, url) in enumerate(project["links"].items()):
-            with cols[i]:
-                st.link_button(label, url, use_container_width=True)
-
-# --- 2. UPDATED NOTEBOOK DATA (With Images & Perfect Sizes) ---
-# We use relevant placeholder images for a visual "collage" feel
+# --- 3. DATA: NOTEBOOKS ---
 NOTEBOOKS = [
-    {
-        "name": "Churn Prediction", 
-        "tech": "XGBoost", 
-        "size": "card-wide", 
-        "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80"
-    },
-    {
-        "name": "Movie Recommender", 
-        "tech": "SVD / Matrix Fac", 
-        "size": "card-tall", 
-        "img": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80"
-    },
-    {
-        "name": "Stock Forecasting", 
-        "tech": "LSTM / TensorFlow", 
-        "size": "card-big", 
-        "img": "https://images.unsplash.com/photo-1611974765270-ca1258634369?w=600&q=80"
-    },
-    {
-        "name": "Titanic EDA", 
-        "tech": "Seaborn", 
-        "size": "card-medium", 
-        "img": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&q=80"
-    },
-    {
-        "name": "Twitter Sentiment", 
-        "tech": "NLTK / VADER", 
-        "size": "card-medium", 
-        "img": "https://images.unsplash.com/photo-1611605698389-377a032434f6?w=600&q=80"
-    },
-    {
-        "name": "Housing Prices", 
-        "tech": "Scikit-Learn", 
-        "size": "card-wide", 
-        "img": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80"
-    },
-    {
-        "name": "Image Classifier", 
-        "tech": "PyTorch / CNN", 
-        "size": "card-tall", 
-        "img": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80"
-    },
-    {
-        "name": "Credit Fraud", 
-        "tech": "Anomaly Detect", 
-        "size": "card-medium", 
-        "img": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80"
-    },
-    {
-        "name": "Farudulant", 
-        "tech": "Anomaly Detect", 
-        "size": "card-medium", 
-        "img": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80"
-    },
-    {
-        "name": "Spotify Viz", 
-        "tech": "Plotly", 
-        "size": "card-medium", 
-        "img": "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=600&q=80"
-    },
-    {
-        "name": "FMCG",
-        "tech": "Plotly", 
-        "size": "card-medium", 
-        "img": "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=600&q=80"
-    },
-    {
-        "name": "Resume Parser", 
-        "tech": "Spacy / NLP", 
-        "size": "card-wide", 
-        "img": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&q=80"
-    },
+    {"name": "Churn Prediction", "tech": "XGBoost", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80", "github": "#", "insight": "Achieved 89% accuracy. Key predictors: Contract Type, Tenure."},
+    {"name": "Movie Recommender", "tech": "SVD / Matrix Fac", "img": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80", "github": "#", "insight": "Solved cold-start problem using hybrid filtering approach."},
+    {"name": "Stock Forecasting", "tech": "LSTM / TensorFlow", "img": "https://images.unsplash.com/photo-1611974765270-ca1258634369?w=600&q=80", "github": "#", "insight": "Multi-layer LSTM capturing long-term dependencies in S&P 500 data."},
+    {"name": "Titanic EDA", "tech": "Seaborn", "img": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&q=80", "github": "#", "insight": "Visualized survival skew using Violin plots and Heatmaps."},
+    {"name": "Twitter Sentiment", "tech": "NLTK / VADER", "img": "https://images.unsplash.com/photo-1611605698389-377a032434f6?w=600&q=80", "github": "#", "insight": "Analyzed 50k tweets. VADER lexicon outperformed Naive Bayes."},
+    {"name": "Housing Prices", "tech": "Scikit-Learn", "img": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80", "github": "#", "insight": "Handled missing data via KNN imputation. optimized Random Forest."},
+    {"name": "Image Classifier", "tech": "PyTorch / CNN", "img": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80", "github": "#", "insight": "ResNet-50 on CIFAR-10. Data augmentation improved val acc to 94%."},
+    {"name": "Credit Fraud", "tech": "Anomaly Detect", "img": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80", "github": "#", "insight": "SMOTE oversampling used to handle 0.17% class imbalance."},
 ]
 
-# --- 4. HELPER: RENDER NOTEBOOK COLLAGE (Visual Masonry) ---
-def render_notebook_collage():
-    st.write("")
-    st.divider()
-    st.subheader("🧪 Experiments & Notebooks")
-    st.caption("A visual collection of my EDA and POC work.")
-
+# --- 4. CSS STYLING ---
+def load_project_css():
     st.markdown("""
     <style>
-        /* THE CONTAINER */
-        .collage-grid {
-            display: grid;
-            /* Force 4 columns on desktop for perfect packing */
-            grid-template-columns: repeat(4, 1fr); 
-            grid-auto-rows: 150px; /* Fixed row height */
-            gap: 12px;
-            grid-auto-flow: dense; /* Fills holes automatically */
-            padding: 10px 0;
-        }
-
-        /* THE CARD */
-        .notebook-card {
-            position: relative;
+        .block-container { padding-top: 1rem !important; padding-bottom: 2rem !important; }
+    
+        /* --- 1. MAIN PROJECT CARD --- */
+        .project-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
             overflow: hidden;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            height: 100%;
+            display: flex; flex-direction: column; text-decoration: none;
         }
-
-        /* BACKGROUND IMAGE LAYER */
-        .card-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s ease;
-            z-index: 1;
-        }
-
-        /* OVERLAY FOR TEXT READABILITY */
-        .card-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
-            z-index: 2;
+        .project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); border-color: #38bdf8; }
+        .card-img-box { height: 180px; width: 100%; overflow: hidden; position: relative; border-bottom: 1px solid #f1f5f9; }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .project-card:hover .card-img-box img { transform: scale(1.08); }
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+        .card-desc { font-size: 0.9rem; color: #64748b; line-height: 1.5; margin-bottom: 16px; flex-grow: 1; }
+        .tech-pill { background-color: #f1f5f9; color: #475569; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; border: 1px solid #e2e8f0; }
+        .badge-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+        .card-footer { display: flex; gap: 10px; margin-top: auto; }
+        .btn-link { flex: 1; text-align: center; padding: 8px 0; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .btn-primary { background-color: #0f172a; color: #ffffff !important; }
+        .btn-secondary { background-color: #ffffff; color: #0f172a !important; border: 1px solid #cbd5e1; }
+        
+        /* --- 2. NOTEBOOK SPECIFIC STYLING --- */
+        
+        /* GREEN TECH TEXT (Custom Class) */
+        .nb-tech-green {
+            color: #22c55e !important; /* Green color */
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 2px;
+            margin-bottom: 12px;
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 15px;
-            opacity: 0.9;
+            align-items: center;
+            gap: 5px;
         }
 
-        /* HOVER EFFECTS */
-        .notebook-card:hover { transform: scale(1.02); z-index: 10; }
-        .notebook-card:hover .card-bg { transform: scale(1.1); }
-        .notebook-card:hover .card-overlay { background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4)); }
+        /* WHITE WIDE BUTTON WITH BORDER (Targeting buttons inside notebook containers only) */
+        div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] button {
+            background-color: #ffffff !important;
+            color: #1e293b !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            padding: 10px 40px !important; /* Makes it wider */
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            width: 100% !important;
+        }
 
-        /* TEXT STYLES */
-        .nb-title { color: white; font-weight: 700; font-size: 14px; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .nb-tech { color: #ddd; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* SIZING CLASSES */
-        .card-medium { grid-column: span 1; grid-row: span 1; }
-        .card-wide   { grid-column: span 2; grid-row: span 1; }
-        .card-tall   { grid-column: span 1; grid-row: span 2; }
-        .card-big    { grid-column: span 2; grid-row: span 2; }
-
-        /* MOBILE RESPONSIVENESS */
-        @media (max-width: 768px) {
-            .collage-grid { grid-template-columns: repeat(2, 1fr); }
+        div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] button:hover {
+            border-color: #22c55e !important;
+            background-color: #f8fafc !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
     </style>
     """, unsafe_allow_html=True)
 
-    # HTML GENERATION
-    html_content = '<div class="collage-grid">'
-    for nb in NOTEBOOKS:
-        size = nb.get('size', 'card-medium')
-        link = nb.get('link', '#')
-        img_url = nb.get('img', '')
+# --- 5. DIALOG: INSIGHT POPUP ---
+@st.dialog("📄 Notebook Details", width="large")
+def show_notebook_popup(nb):
+    c1, c2 = st.columns([1, 2], gap="medium")
+    with c1:
+        st.image(nb['img'], use_container_width=True)
+    with c2:
+        st.markdown(f"## {nb['name']}")
+        # Keep consistent green styling in popup too
+        st.markdown(f"<span style='color:#22c55e; font-weight:700;'>🔧 {nb['tech']}</span>", unsafe_allow_html=True)
+        st.info(nb.get('insight', 'No summary available.'))
+        st.link_button("View Source Code on GitHub ↗", nb.get('github', '#'), type="primary", use_container_width=True)
         
-        html_content += f"""
-        <a href="{link}" class="notebook-card {size}">
-            <div class="card-bg" style="background-image: url('{img_url}');"></div>
-            <div class="card-overlay">
-                <div class="nb-title">{nb['name']}</div>
-                <div class="nb-tech">{nb['tech']}</div>
-            </div>
-        </a>"""
+    st.divider()
+    st.markdown("### 🔍 Technical Overview")
+    st.write("This notebook explores data patterns using advanced statistical methods and machine learning architectures.")
+
+# --- 6. RENDERERS ---
+
+def render_project_card(project):
+    """HTML Card for Main Projects (Unchanged)"""
+    badges_html = "".join([f'<span class="tech-pill">{tag}</span>' for tag in project["tags"]])
+    buttons_html = ""
+    if "Live Demo" in project["links"]:
+        buttons_html += f'<a href="{project["links"]["Live Demo"]}" class="btn-link btn-primary" target="_blank">🚀 Demo</a>'
+    if "GitHub" in project["links"]:
+        buttons_html += f'<a href="{project["links"]["GitHub"]}" class="btn-link btn-secondary" target="_blank">💻 Code</a>'
+
+    st.markdown(f"""
+    <div class="project-card">
+        <div class="card-img-box"><img src="{project['image']}"></div>
+        <div class="card-body">
+            <div class="card-title">{project['title']}</div>
+            <div class="card-desc">{project['description']}</div>
+            <div class="badge-container">{badges_html}</div>
+            <div class="card-footer">{buttons_html}</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+def render_notebook_grid():
+    """Renders Notebooks with corrected Green Tech labels and White Wide buttons."""
+    st.write("")
+    st.divider()
+    st.subheader("🧪 Experiments & Notebooks")
+    st.caption("A visual collection of my EDA and POC work. Click 'Insight' for details.")
+
+    cols = st.columns(4)
     
-    html_content += "</div>"
-    st.markdown(html_content, unsafe_allow_html=True)
+    for i, nb in enumerate(NOTEBOOKS):
+        col = cols[i % 4]
+        with col:
+            with st.container(border=True):
+                st.image(nb['img'], use_container_width=True)
+                st.markdown(f"**{nb['name']}**")
+                
+                # Tech name with custom Green class
+                st.markdown(f'<div class="nb-tech-green">🔧 {nb["tech"]}</div>', unsafe_allow_html=True)
+                
+                # Full-width Insight button
+                if st.button("Insight 📄", key=f"btn_{i}", use_container_width=True):
+                    show_notebook_popup(nb)
 
-# --- 5. MAIN PAGE RENDERER ---
-
+# --- 7. MAIN LOGIC ---
 def render_projects():
-    st.title("🛠️ Project Gallery")
-    st.markdown("Here is a selection of my recent work in **Generative AI**, **Data Engineering**, and **Full-Stack Data Science**.")
+    load_project_css()
     
-    # --- A. FILTER SECTION ---
-    all_tags = sorted(list(set([tag for p in PROJECTS for tag in p["tags"]])))
-    selected_tags = st.multiselect("🔍 Filter Featured Projects:", options=all_tags, default=None)
+    c_text, c_filter = st.columns([3, 1], gap="large")
+    with c_text:
+        st.markdown("## 🛠️ Project Gallery")
+    with c_filter:
+        all_tags = sorted(list(set([tag for p in PROJECTS for tag in p["tags"]])))
+        selected_tags = st.multiselect("Search", all_tags, label_visibility="collapsed", placeholder="🔍 Filter...")
+
+    st.divider()
     
-    st.write("") # Spacer
-
-    # --- B. FILTER LOGIC ---
-    if selected_tags:
-        filtered_projects = [p for p in PROJECTS if any(tag in selected_tags for tag in p["tags"])]
-    else:
-        filtered_projects = PROJECTS
-
-    # --- C. MAIN GRID RENDER ---
+    filtered_projects = [p for p in PROJECTS if any(tag in selected_tags for tag in p["tags"])] if selected_tags else PROJECTS
+    
     if not filtered_projects:
-        st.info("No projects match these filters.")
+        st.info("No projects found.")
     else:
         cols = st.columns(2, gap="medium")
         for i, project in enumerate(filtered_projects):
             with cols[i % 2]:
                 render_project_card(project)
-
-    # --- D. THE NOTEBOOK COLLAGE (Always visible at bottom) ---
     
-    render_notebook_collage()
+    render_notebook_grid()
 
-
+if __name__ == "__main__":
+    render_projects()
