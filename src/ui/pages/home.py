@@ -16,18 +16,18 @@ def open_ask_me_dialog():
 
 def get_image_base64(path):
     if os.path.exists(path):
-        img = Image.open(path)
-        
-        # --- CROP LOGIC ---
-        # Define coordinates: (left, top, right, bottom)
-        # Example: Crop 100 pixels off the top and bottom
-        width, height = img.size
-        img = img.crop((0, height * 0.1, width, height * 0.9)) 
-        
-        # Convert back to base64
-        buffered = io.BytesIO()
-        img.save(buffered, format="JPEG")
-        return base64.b64encode(buffered.getvalue()).decode()
+        try:
+            img = Image.open(path)
+            width, height = img.size
+            # Keep crop logic
+            img = img.crop((0, height * 0.1, width, height * 0.9)) 
+            
+            buffered = io.BytesIO()
+            img.save(buffered, format="JPEG")
+            return base64.b64encode(buffered.getvalue()).decode()
+        except Exception as e:
+            st.error(f"Error processing image: {e}")
+            return None
     return None
 
 def render_home():
@@ -100,7 +100,10 @@ def render_home():
     """, unsafe_allow_html=True)
 
     # 2. CONVERT YOUR PHOTO
-    img_path = r"D:/ds-portfolio/assets/profile_pic/U89A0267.JPG"
+    # img_path = r"D:/ds-portfolio/assets/profile_pic/U89A0267.JPG"
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    img_path = os.path.normpath(os.path.join(current_dir, "../../../assets/profile_pic/U89A0267.JPG"))
+
     img_base64 = get_image_base64(img_path)
     
     # Fallback to a placeholder if file is missing

@@ -3,11 +3,6 @@ import base64
 import os
 
 def render_resume():
-    """
-    Renders the Resume Page with a Download Button and PDF Preview.
-    """
-    
-    # 1. Header
     st.markdown('<div style="margin-bottom: 40px; padding: 0 1rem;">', unsafe_allow_html=True)
     st.markdown("""
         <h1 style="text-align: center;">Resume</h1>
@@ -17,23 +12,23 @@ def render_resume():
     """, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # 2. File Path Logic
-    # We look for the file in 'assets/resume.pdf'
-    # Adjust this path if your folder structure is different
-    resume_path = "assets/resume.pdf"
+    # --- DYNAMIC PATH LOGIC ---
+    # This gets the directory where resume.py is, then goes up to the root
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Assuming your structure is: root/src/ui/pages/resume.py
+    # We go up 3 levels to reach the root, then into assets
+    resume_path = os.path.join(current_dir, "../../../assets/resume.pdf")
     
-    # Check if file exists to prevent crash
+    # Debug: If it fails, this will tell you exactly WHERE it is looking
     if not os.path.exists(resume_path):
-        st.error("⚠️ Resume file not found. Please place 'resume.pdf' in the 'assets' folder.")
+        st.error(f"⚠️ File not found at: {resume_path}")
+        st.info("Check if your folder is named 'assets' (lowercase) in GitHub!")
         return
 
-    # 3. Read File for Download & Display
     with open(resume_path, "rb") as f:
         pdf_data = f.read()
         b64_pdf = base64.b64encode(pdf_data).decode('utf-8')
 
-    # 4. Download Button (Centered)
-    # We use columns to center the button
     c1, c2, c3 = st.columns([1, 1, 1])
     with c2:
         st.download_button(
@@ -45,11 +40,9 @@ def render_resume():
             type="primary"
         )
     
-    st.write("") # Spacer
+    st.write("") 
 
-    # 5. PDF Preview (Iframe)
-    # This embeds the PDF directly in the browser
-    pdf_display = f'<iframe src="data:application/pdf;base64,{b64_pdf}" width="100%" height="1000" type="application/pdf"></iframe>'
-    
+    # PDF Preview
+    pdf_display = f'<iframe src="data:application/pdf;base64,{b64_pdf}" width="100%" height="1000" type="application/pdf" style="border:none;"></iframe>'
     st.markdown("### Preview")
     st.markdown(pdf_display, unsafe_allow_html=True)

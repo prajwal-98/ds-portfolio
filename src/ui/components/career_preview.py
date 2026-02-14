@@ -1,7 +1,13 @@
 # src/ui/components/career_preview.py
 import streamlit as st
-from streamlit_timeline import st_timeline as timeline
 from src.ui.components.timeline_data import get_career_timeline_data
+
+try:
+    # Try the most common export name
+    from streamlit_timeline import st_timeline as timeline
+except ImportError:
+    # Fallback to the alternative export name
+    from streamlit_timeline import timeline
 
 def render_career_preview():
     """
