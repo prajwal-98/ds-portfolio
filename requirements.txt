@@ -4,7 +4,9 @@ langchain-google-genai==2.0.0
 python-dotenv==1.2.1
 numpy
 
-# Community components with correct installation names
-streamlit-timeline==0.0.2
+# The actual package that allows "from streamlit_timeline import ..."
+streamlit-vis-timeline==0.3.0
+
+# UI Components
 streamlit-lottie==0.0.5
 streamlit-option-menu==0.4.0
