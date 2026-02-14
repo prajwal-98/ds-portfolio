@@ -4,8 +4,8 @@ langchain-google-genai==2.0.0
 python-dotenv==1.2.1
 numpy
 
-# The actual package that allows "from streamlit_timeline import ..."
-streamlit-vis-timeline==0.3.0
+# Try the original version which matches the import 'streamlit_timeline'
+streamlit-timeline==0.0.2
 
 # UI Components
 streamlit-lottie==0.0.5
