@@ -8,13 +8,36 @@ if __name__ == "__main__":
         layout="wide"
     )
 
+def render_dev_indicator():
+    """Renders a small fixed 'STAGING' badge in the bottom right."""
+    st.markdown("""
+        <style>
+        .dev-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f59e0b; /* Amber/Orange */
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            pointer-events: none;
+        }
+        </style>
+        <div class="dev-badge">🚧 DEV MODE</div>
+    """, unsafe_allow_html=True)
+
 # --- 2. DATA: PROJECTS ---
 PROJECTS = [
     {
         "title": "GenAI Portfolio Engine",
         "category": "GenAI",
         "tags": ["Streamlit", "LangChain", "RAG", "Pinecone"],
-        "description": "A self-aware portfolio that uses RAG to answer questions about my resume and code. Built with a custom Streamlit UI and hybrid search retrieval.",
+        "description": "A self-aware portfolio that uses RAG to answer questions about my resume and code.",
         "links": {"GitHub": "#", "Live Demo": "#"},
         "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop"
     },
@@ -22,7 +45,7 @@ PROJECTS = [
         "title": "Real-Time Fraud Guard",
         "category": "Data Engineering",
         "tags": ["PySpark", "Databricks", "Kafka", "MLflow"],
-        "description": "Enterprise-grade pipeline processing 10TB+ daily transaction data. Detects anomalies in sub-200ms latency using Structured Streaming.",
+        "description": "Enterprise-grade pipeline processing 10TB+ daily transaction data.",
         "links": {"GitHub": "#"},
         "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop"
     },
@@ -30,7 +53,7 @@ PROJECTS = [
         "title": "Enterprise LLM Tagger",
         "category": "GenAI",
         "tags": ["Python", "OpenAI API", "AsyncIO"],
-        "description": "Designed an async batch-processing system to tag 50k+ product descriptions. Optimized token usage to reduce API costs by 30%.",
+        "description": "Designed an async batch-processing system to tag 50k+ product descriptions.",
         "links": {"GitHub": "#"},
         "image": "https://images.unsplash.com/photo-1662947036643-2339bd9273c5?q=80&w=1000&auto=format&fit=crop"
     },
@@ -38,7 +61,7 @@ PROJECTS = [
         "title": "Legacy to Lakehouse Migration",
         "category": "Cloud Architecture",
         "tags": ["Azure", "Terraform", "Airflow"],
-        "description": "Migrated on-prem SQL Server infrastructure to Azure Data Lake. Implemented automated schema evolution and Great Expectations quality checks.",
+        "description": "Migrated on-prem SQL Server infrastructure to Azure Data Lake.",
         "links": {"GitHub": "#"},
         "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
     }
@@ -46,14 +69,14 @@ PROJECTS = [
 
 # --- 3. DATA: NOTEBOOKS ---
 NOTEBOOKS = [
-    {"name": "Churn Prediction", "tech": "XGBoost", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80", "github": "#", "insight": "Achieved 89% accuracy. Key predictors: Contract Type, Tenure."},
-    {"name": "Movie Recommender", "tech": "SVD / Matrix Fac", "img": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80", "github": "#", "insight": "Solved cold-start problem using hybrid filtering approach."},
-    {"name": "Stock Forecasting", "tech": "LSTM / TensorFlow", "img": "https://images.unsplash.com/photo-1611974765270-ca1258634369?w=600&q=80", "github": "#", "insight": "Multi-layer LSTM capturing long-term dependencies in S&P 500 data."},
-    {"name": "Titanic EDA", "tech": "Seaborn", "img": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&q=80", "github": "#", "insight": "Visualized survival skew using Violin plots and Heatmaps."},
-    {"name": "Twitter Sentiment", "tech": "NLTK / VADER", "img": "https://images.unsplash.com/photo-1611605698389-377a032434f6?w=600&q=80", "github": "#", "insight": "Analyzed 50k tweets. VADER lexicon outperformed Naive Bayes."},
-    {"name": "Housing Prices", "tech": "Scikit-Learn", "img": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80", "github": "#", "insight": "Handled missing data via KNN imputation. optimized Random Forest."},
-    {"name": "Image Classifier", "tech": "PyTorch / CNN", "img": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80", "github": "#", "insight": "ResNet-50 on CIFAR-10. Data augmentation improved val acc to 94%."},
-    {"name": "Credit Fraud", "tech": "Anomaly Detect", "img": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80", "github": "#", "insight": "SMOTE oversampling used to handle 0.17% class imbalance."},
+    {"name": "Churn Prediction", "tech": "XGBoost", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80", "github": "#", "insight": "Achieved 89% accuracy."},
+    {"name": "Movie Recommender", "tech": "SVD / Matrix Fac", "img": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80", "github": "#", "insight": "Solved cold-start problem."},
+    {"name": "Stock Forecasting", "tech": "LSTM / TensorFlow", "img": "https://images.unsplash.com/photo-1611974765270-ca1258634369?w=600&q=80", "github": "#", "insight": "Multi-layer LSTM model."},
+    {"name": "Titanic EDA", "tech": "Seaborn", "img": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&q=80", "github": "#", "insight": "Visualized survival skew."},
+    {"name": "Twitter Sentiment", "tech": "NLTK / VADER", "img": "https://images.unsplash.com/photo-1611605698389-377a032434f6?w=600&q=80", "github": "#", "insight": "Analyzed 50k tweets."},
+    {"name": "Housing Prices", "tech": "Scikit-Learn", "img": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80", "github": "#", "insight": "Regression analysis on Ames data."},
+    {"name": "Image Classifier", "tech": "PyTorch / CNN", "img": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80", "github": "#", "insight": "ResNet-50 on CIFAR-10."},
+    {"name": "Credit Fraud", "tech": "Anomaly Detect", "img": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80", "github": "#", "insight": "Detected fraud in imbalanced data."}
 ]
 
 # --- 4. CSS STYLING ---
@@ -87,10 +110,8 @@ def load_project_css():
         .btn-secondary { background-color: #ffffff; color: #0f172a !important; border: 1px solid #cbd5e1; }
         
         /* --- 2. NOTEBOOK SPECIFIC STYLING --- */
-        
-        /* GREEN TECH TEXT (Custom Class) */
         .nb-tech-green {
-            color: #22c55e !important; /* Green color */
+            color: #22c55e !important;
             font-size: 0.85rem;
             font-weight: 600;
             margin-top: 2px;
@@ -100,22 +121,21 @@ def load_project_css():
             gap: 5px;
         }
 
-        /* WHITE WIDE BUTTON WITH BORDER (Targeting buttons inside notebook containers only) */
+        /* Targets ONLY the buttons in the notebook grid containers */
         div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] button {
             background-color: #ffffff !important;
             color: #1e293b !important;
             border: 1px solid #cbd5e1 !important;
             border-radius: 8px !important;
-            padding: 10px 40px !important; /* Makes it wider */
+            padding: 10px 40px !important;
             font-weight: 600 !important;
-            transition: all 0.3s ease !important;
             width: 100% !important;
+            transition: all 0.3s ease !important;
         }
 
         div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] button:hover {
             border-color: #22c55e !important;
             background-color: #f8fafc !important;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
     </style>
     """, unsafe_allow_html=True)
@@ -128,19 +148,16 @@ def show_notebook_popup(nb):
         st.image(nb['img'], use_container_width=True)
     with c2:
         st.markdown(f"## {nb['name']}")
-        # Keep consistent green styling in popup too
         st.markdown(f"<span style='color:#22c55e; font-weight:700;'>🔧 {nb['tech']}</span>", unsafe_allow_html=True)
         st.info(nb.get('insight', 'No summary available.'))
         st.link_button("View Source Code on GitHub ↗", nb.get('github', '#'), type="primary", use_container_width=True)
-        
     st.divider()
     st.markdown("### 🔍 Technical Overview")
-    st.write("This notebook explores data patterns using advanced statistical methods and machine learning architectures.")
+    st.write("This notebook explores data patterns using advanced statistical methods.")
 
 # --- 6. RENDERERS ---
 
 def render_project_card(project):
-    """HTML Card for Main Projects (Unchanged)"""
     badges_html = "".join([f'<span class="tech-pill">{tag}</span>' for tag in project["tags"]])
     buttons_html = ""
     if "Live Demo" in project["links"]:
@@ -161,31 +178,25 @@ def render_project_card(project):
     """, unsafe_allow_html=True)
 
 def render_notebook_grid():
-    """Renders Notebooks with corrected Green Tech labels and White Wide buttons."""
     st.write("")
     st.divider()
     st.subheader("🧪 Experiments & Notebooks")
-    st.caption("A visual collection of my EDA and POC work. Click 'Insight' for details.")
-
     cols = st.columns(4)
-    
     for i, nb in enumerate(NOTEBOOKS):
-        col = cols[i % 4]
-        with col:
+        with cols[i % 4]:
             with st.container(border=True):
                 st.image(nb['img'], use_container_width=True)
                 st.markdown(f"**{nb['name']}**")
-                
-                # Tech name with custom Green class
                 st.markdown(f'<div class="nb-tech-green">🔧 {nb["tech"]}</div>', unsafe_allow_html=True)
-                
-                # Full-width Insight button
                 if st.button("Insight 📄", key=f"btn_{i}", use_container_width=True):
                     show_notebook_popup(nb)
 
 # --- 7. MAIN LOGIC ---
 def render_projects():
     load_project_css()
+    
+    # CALLING THE DEV INDICATOR HERE
+    render_dev_indicator()
     
     c_text, c_filter = st.columns([3, 1], gap="large")
     with c_text:
