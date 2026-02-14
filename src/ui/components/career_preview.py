@@ -1,6 +1,6 @@
 # src/ui/components/career_preview.py
 import streamlit as st
-from streamlit_timeline import timeline
+from streamlit_timeline import st_timeline as timeline
 from src.ui.components.timeline_data import get_career_timeline_data
 
 def render_career_preview():
