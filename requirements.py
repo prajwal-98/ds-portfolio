@@ -1,0 +1,10 @@
+streamlit==1.54.0
+langchain==0.3.0
+langchain-google-genai==2.0.0
+google-generativeai==0.8.3
+python-dotenv==1.2.1
+pandas==2.3.3
+numpy==2.2.6
+pillow==12.1.0
+plotly==6.5.2
+scikit-learn==1.7.2
