@@ -3,16 +3,36 @@ name: Keep Streamlit App Awake
 # This section tells GitHub WHEN to run the script
 on:
   schedule:
-    # This cron schedule runs the job at 00:00 UTC every day
+    # This cron schedule runs the job every hour
     - cron: '0 */1 * * *'
   # This line allows you to trigger the action manually from the GitHub UI if you ever want to
-  workflow_dispatch: 
+  workflow_dispatch:
 
 # This section tells GitHub WHAT to do
 jobs:
   ping:
     runs-on: ubuntu-latest
+    
+    # Grant write permissions so the runner can push the dummy commit back to the repo
+    permissions:
+      contents: write
+
     steps:
+      # Step 1: Check out the repository so the runner can modify files
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Your existing ping script (Make sure to replace YOUR-APP-NAME with your actual app URL)
       - name: Ping Streamlit URL
-        # The curl command silently visits your app and prints the HTTP status code (e.g., 200 for success)
-        run: curl -s -o /dev/null -w "%{http_code}" https://YOUR-APP-NAME.streamlit.app/
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" https://YOUR-APP-NAME.streamlit.app/
+
+      # Step 3: Log the date and push a commit to keep the repository active
+      - name: Keep Repository Active
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          echo "$(date)" > keep_alive.txt
+          git add keep_alive.txt
+          git commit -m "Automated keep-alive commit to prevent workflow suspension" || exit 0
+          git push
